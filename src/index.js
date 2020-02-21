@@ -1,5 +1,5 @@
 "use strict";
-let LAST = 0;
+
 class Calculator {
   constructor() {
     this.resultArray = [];
@@ -9,6 +9,13 @@ class Calculator {
   add() {
     let sum = 0;
     for (let i = 0; i < arguments.length; i++) {
+      if(arguments[i] == "LAST"){
+        sum += this.last()
+      } else if(typeof arguments[i] === "string" && arguments[i].includes("SLOT_")) {
+        let numSlot = arguments[i].match(/\d+/g)
+        Number(numSlot)
+        sum += this.get_slot(numSlot)
+      } else
       sum += arguments[i];
     }
     this.resultArray.push(sum);
@@ -17,38 +24,27 @@ class Calculator {
   multiply() {
     let product = 1;
     for (let i = 0; i < arguments.length; i++) {
+      if(arguments[i] == "LAST"){
+        product *= this.last()
+      } else if(typeof arguments[i] === "string" && arguments[i].includes("SLOT_")) {
+        let numSlot = arguments[i].match(/\d+/g)
+        Number(numSlot)
+        product *= this.get_slot(numSlot)
+      } else
       product *= arguments[i];
     }
     this.resultArray.push(product);
     return product;
   }
   last() {
-    LAST = this.resultArray[this.resultArray.length - 1];
-    return LAST;
+    return this.resultArray[this.resultArray.length - 1];
   }
   set_slot(numSlot) {
-    
-    return numSlot;
+   this.memory_slot.push(this.resultArray[numSlot - 1])
   }
   get_slot(numSlot) {
-      numSlot =this.resultArray[this.resultArray.length - 1]  
-    return numSlot;
+   return this.memory_slot[numSlot - 1]
   }
 }
-let calc = new Calculator();
-calc.add(1, 2);
-
-console.log(calc.last());
-// console.log(calc.add(LAST, 4, 5));
-console.log(calc.resultArray);
-console.log(calc.set_slot(1));
-console.log(calc.get_slot(1) + " should return 3");
-calc.add(10,20);
-console.log(calc.set_slot(2));
-console.log(calc.get_slot(2) + " should return 30");
-calc.add(100, 200);
-console.log(calc.get_slot(2) + "should return 30");
-console.log(calc.get_slot(1) + " should return 3");
-
 
 module.exports = Calculator;
