@@ -1,47 +1,32 @@
 describe("Calculator", () => {
 
   beforeEach(function() {
-    global.Calculator = require("../src/index");
+    global.Calculator = require("../src/simple-calculator-part2");
     global.calculator1 = new Calculator();
   });
 
-  it("should test if add() have been called", () => {
-    spyOn(calculator1, "add");
-    calculator1.add();
-    expect(calculator1.add).toHaveBeenCalled();
+  it('should check if add() is defined', function() {
+    expect(calculator1.add()).toBeDefined();
   });
 
-  it("should test if multiply() have been called", () => {
-    spyOn(calculator1, "multiply");
-    calculator1.multiply();
-    expect(calculator1.multiply).toHaveBeenCalled();
-  });
-
-  it("should test if add() have been called", () => {
-    spyOn(calculator1, "add");
-    calculator1.add();
-    expect(calculator1.add).toHaveBeenCalledTimes(1);
-  });
-
-  it("should test if multiply() have been called", () => {
-    spyOn(calculator1, "multiply");
-    calculator1.multiply();
-    expect(calculator1.multiply).toHaveBeenCalledTimes(1);
-  });
-  it("should test if add() have been called", () => {
-    spyOn(calculator1, "add");
-    calculator1.add(1, 2);
-    expect(calculator1.add).toHaveBeenCalledWith(1, 2);
-  });
-
-  it("should test if multiply() have been called", () => {
-    spyOn(calculator1, "multiply");
-    calculator1.multiply(1, 3);
-    expect(calculator1.multiply).toHaveBeenCalledWith(1, 3);
+  it('should check if multiply() is defined', function() {
+    expect(calculator1.multiply()).toBeDefined();
   });
 
   it("should return 3", () => {
     expect(calculator1.add(1, 2)).toBe(3);
+  });
+
+  it('should check the sum of two numbers', function() {
+    expect(calculator1.add(0, 0)).toBe(0);
+  });
+
+  it('should return 60 ', function() {
+    expect(calculator1.multiply(30, 2)).toBe(60);
+  });
+
+  it('should multipy numbers in the array', function() {
+    expect(calculator1.multiply(1, 2, 3, 4)).toBe(24);
   });
 
   it("should return result with 'LAST' as parameter", () => {
@@ -50,11 +35,6 @@ describe("Calculator", () => {
     expect(calculator1.multiply("LAST", 5)).toBe(15);
   });
 
-  it("should check if set_slot is called", () => {
-    spyOn(calculator1, "set_slot");
-    calculator1.set_slot(1);
-    expect(calculator1.set_slot).toHaveBeenCalledWith(1);
-  });
 
   it("should return get_slot(1) number", () => {
     calculator1.add(1, 2);

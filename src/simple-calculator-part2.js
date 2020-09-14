@@ -3,7 +3,7 @@
 class Calculator {
   constructor() {
     this.resultArray = [];
-    this.memory_slot = [];
+    this.memorySlot = [];
   }
 
   add() {
@@ -40,10 +40,10 @@ class Calculator {
     return this.resultArray[this.resultArray.length - 1];
   }
   set_slot(numSlot) {
-   this.memory_slot.push(this.resultArray[numSlot - 1]);
+   this.memorySlot.push(this.resultArray[numSlot - 1]);
   }
   get_slot(numSlot) {
-   return this.memory_slot[numSlot - 1];
+   return this.memorySlot[numSlot - 1];
   }
 }
 
